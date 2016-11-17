@@ -13,5 +13,9 @@ Links:
 
 ![Genome Studio report generation screenshot](https://github.com/argju/penncnvklubben/blob/master/screenshots/report.png)
 
-* 
+```bash
+reportfile="/mnt/c/Users/arneg.GENO/Desktop/GENO\ oppstart/180615_bovine777K_48samples_FinalReport_PennCNV.txt"
+mkdir signal
+split_illumina_report.pl --prefix signal/ --suffix .txt $reportfile
+```
 
