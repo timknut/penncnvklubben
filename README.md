@@ -34,3 +34,9 @@ split_illumina_report.pl --prefix signal/ --suffix .txt $reportfile   #create si
 ls -1 signal/*.txt > signalfilelist
 compile_pfb.pl --listfile signalfilelist -snpposfile $snpposfile -output pfbfile.pfb #create pdf file
 ```
+
+## Step 1 Detect CNVs
+
+```bash
+detect_cnv.pl --test -pfb pfbfile.pfb -hmm ../../PennCNV-1.0.3/lib/hhall.hmm --lastchr 29 signal/9200246_7736.txt signal/6333982_8239.txt --log detect_cnv.log --out detect_cnv.out
+```
