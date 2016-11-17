@@ -11,7 +11,7 @@ Links:
 * Load .bsf file, Analysis -> Reports -> Report wizard -> Final report
 * Displayed fields: SNP name, Sample ID, B Allele freq, Log R ratio. 
 
-![Genome Studio report generation screenshot]()
+![Genome Studio report generation screenshot](https://github.com/argju/penncnvklubben/blob/master/screenshots/report.png)
 
 * 
 
