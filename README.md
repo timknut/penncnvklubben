@@ -38,8 +38,12 @@ compile_pfb.pl --listfile signalfilelist -snpposfile $snpposfile -output pfbfile
 ## Step 1 Detect CNVs
 
 ```bash
+#cnv detection
 detect_cnv.pl --test -pfb pfbfile.pfb -hmm ../../PennCNV-1.0.3/lib/hhall.hmm --lastchr 29 signal/9200246_7736.txt signal/6333982_8239.txt --log detect_cnv.log --out detect_cnv.out #two signal files
 detect_cnv.pl --test -pfb pfbfile.pfb -hmm ../../PennCNV-1.0.3/lib/hhall.hmm --lastchr 29 --listfile signalfilelist --log detect_cnv.log --out detect_cnv.out #all signal files
+
+#quality control
+filter_cnv.pl detect_cnv.out -qclogfile detect_cnv.log -qclrrsd 0.2 -qcnumcnv 50 -qcpassout detect_cnv.qcpass -qcsumout detect_cnv.qcsum -out detect_cnv.goodcnv
 ```
 
 ## Step :v: Explore results
