@@ -45,6 +45,10 @@ detect_cnv.pl --test -pfb pfbfile.pfb -hmm ../../PennCNV-1.0.3/lib/hhall.hmm --l
 ## Step :v: Explore results
 
 ```R
+library(data.table)
+library(stringr)
+library(plotly)
+
 #Read into R
 cnv <- fread('sed -E s/[[:space:]]+/" "/g ~/penncnvklubben/data/detect_cnv.out',header=F,sep=" ")
 cnv[,numsnp:=as.numeric(str_replace(V2,'numsnp=',''))]
@@ -53,13 +57,14 @@ cnv[,id:=str_replace(str_replace(V5,'signal/',''),'.txt','')]
 cnv[,startsnp:=str_replace(V6,'startsnp=','')]
 cnv[,endsnp:=str_replace(V7,'endsnp=','')]
 pos <- str_split(str_replace(cnv$V1,'chr',''),'[:,-]',simplify=T)
-cnv$chr <- pos[,1]
-cnv$start <- pos[,2]
-cnv$end <- pos[,3]
+cnv$chr <- as.numeric(pos[,1])
+cnv$start <- as.numeric(pos[,2])
+cnv$end <- as.numeric(pos[,3])
 statecn <- str_split(str_replace(str_replace(cnv$V4,'state',''),'cn=',''),'[,]',simplify=T)
 cnv$state <- statecn[,1]
 cnv$cn <- statecn[,2]
 cnv <- cnv[,.(chr,start,end,length,numsnp,id,state,cn,startsnp,endsnp)]
+
 
 #Plot results
 ggplot(cnv[chr==3]) + geom_linerange(aes(x=id,ymin=start,ymax=end)) + coord_flip() 
