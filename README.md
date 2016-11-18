@@ -24,13 +24,15 @@ export datadir=/mnt/users/gjuvslan/penncnvklubben/data #data to analyse collecte
 
 ```bash
 #filenames for files from Genome Studio
-reportfile="180615_bovine777K_48samples_FinalReport_PennCNV.txt" #Report exported from GenomeStudio
+reportfile1="180615_bovine777K_48samples_FinalReport_PennCNV.txt" #Report exported from GenomeStudio 48 samples
+reportfile2="150430_Tim_777K_144samples_recluster_FinalReport.txt" #Report exported from GenomeStudio 144 samples
 snpposfile="snp_chr_pos.txt"  #Copied columns form Genostudio
 
 #create signal intensity and and pfb files
 cd $datadir
 mkdir -p signal
-split_illumina_report.pl --prefix signal/ --suffix .txt $reportfile   #create signal intensity files
+split_illumina_report.pl --prefix signal/ --suffix .txt $reportfile1   #create signal intensity files
+split_illumina_report.pl --prefix signal/ --suffix .txt $reportfile2   #create signal intensity files
 ls -1 signal/*.txt > signalfilelist
 compile_pfb.pl --listfile signalfilelist -snpposfile $snpposfile -output pfbfile.pfb #create pdf file
 ```
